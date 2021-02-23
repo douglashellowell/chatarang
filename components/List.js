@@ -3,11 +3,12 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import SwipeGesture from './swipe-gesture';
 
 const List = (props) => {
-  console.log(props);
+  //console.log(props);
 
   const handleSwipe = (direction, index) => {
     console.log(direction, index);
     if (direction === 'left') {
+      console.log('left');
       props.removeFromList(index);
     }
   };

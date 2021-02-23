@@ -1,56 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import List from './components/List';
-import SwipeGesture from './components/swipe-gesture';
+import Home from './components/Home';
+import ListAdder from './components/ListAdder';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 export default function App() {
-  const [word, setWord] = useState('cool');
-  const [list, setList] = useState([]);
-  
-  const handlePress = () => {
-    setList(currList => [word, ...currList]);
-    setWord('');
-  }
-
-  const handleTextChange = (newWord) => {
-    setWord(newWord)
-  }
-
-  const removeFromList = (index) => {
-    setList(currentList => {
-      const copy = [...currentList];
-      copy.splice(index, 1);
-      return copy
-    })
-  }
- 
+  const Stack = createStackNavigator();
 
   return (
-    <View style={styles.container}>
-      <Text>The word is {word}</Text>
-      <TextInput
-      onChangeText={handleTextChange}
-      value={word}
-      style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1
-        }}/>
-     
-          <List words={list} addToList={handlePress} removeFromList={removeFromList}/>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="List Adder" component={ListAdder} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
